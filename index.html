@@ -105,6 +105,8 @@ p { margin: 0; }
 .nav .btn { padding: 0.6rem 0.9rem; font-size: 0.9rem; box-shadow: none; }
 .nav .btn-primary:hover { transform: none; }
 .note { font-family: var(--display); font-size: var(--step--1); color: var(--ink-2); }
+.cta { display: grid; gap: 0.75rem; }
+.fine { font-size: var(--step--1); line-height: 1.5; color: var(--ink-2); max-width: 52ch; }
 
 /* Hero */
 .hero { background: var(--band); padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem); }
@@ -251,12 +253,15 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
       <dl class="kv">
         <div><dt>When</dt><dd>Tuesday 8 December 2026<small>Morning (10:30–12:30) or afternoon (14:00–16:00), announced by the UnConference</small></dd></div>
         <div><dt>Where</dt><dd>Palais des Congrès de Paris<small>2 Place de la Porte Maillot, 75017 Paris</small></dd></div>
-        <div><dt>Posters</dt><dd>Submissions open 21 November<small>Due Sunday 29 November 2026, AoE</small></dd></div>
+        <div><dt>Posters</dt><dd>In-person, late-breaking posters<small>Submissions open 21 November, due Sunday 29 November 2026, AoE</small></dd></div>
       </dl>
-      <div class="actions">
-        <!-- TODO: once the Google Form exists, point this at its public link (forms.gle/...) -->
-        <a class="btn btn-primary" href="#posters">Submit a poster</a>
-        <a class="btn" href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">Register for the UnConference</a>
+      <div class="cta">
+        <div class="actions">
+          <!-- TODO: once the Google Form exists, point this at its public link (forms.gle/...) -->
+          <a class="btn btn-primary" href="#posters">Submit a poster</a>
+          <a class="btn" href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">Register for the UnConference</a>
+        </div>
+        <p class="fine">Posters are presented in person only. We host late-breaking posters from people attending the ELLIS UnConference, so the presenting author needs to register for the UnConference and be in Paris on 8 December.</p>
       </div>
     </div>
 
@@ -327,15 +332,12 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
         <h2>About the session</h2>
       </div>
       <div class="prose">
-        <p>Deep learning and foundation models have transformed language and vision, and have just started to transform tabular and relational data. Tabular foundation models and relational deep learning show that pretraining works for structured data, but it is unclear where this leads. Should the community aim for world models over table-like data, unified models across modalities, or something else? What is missing, and why has it not been solved yet?</p>
-        <p>This session takes stock of these questions at a decisive moment. It brings together the tabular and relational sub-communities, who rarely meet in one room, along with junior researchers from other fields who are looking for interaction points and open problems. The spirit is retrospective and visionary: we look at how the structured-data community got here and where it should go next, beyond the latest technical result.</p>
+        <p>Foundation models have transformed language and vision, and are starting to transform tabular and relational data. Where does this lead? World models over tables, unified models across modalities, or something else? This session brings the tabular and relational communities together to look back on their progress and decide what comes next.</p>
       </div>
       <dl class="kv kv-wide">
-        <div><dt>Scope</dt><dd>Any table-like structured data, including spreadsheets, single and multi-table data, and relational databases, for predictive, analytical, and generative AI.</dd></div>
-        <div><dt>Goal</dt><dd>Identify emerging trends across tabular and relational research and define the next generation of research directions.</dd></div>
-        <div><dt>Why now</dt><dd>Foundation models and deep learning are becoming established for structured data, and what comes next is open.</dd></div>
-        <div><dt>Who should come</dt><dd>Junior and senior researchers from the tabular and relational communities, and junior researchers from other fields.</dd></div>
-        <div><dt>You leave with</dt><dd>An overview of the community’s progress, concrete research directions and paper ideas, and new collaborators across sub-communities.</dd></div>
+        <div><dt>Scope</dt><dd>Any table-like data, including spreadsheets, multi-table data, and relational databases.</dd></div>
+        <div><dt>Who should come</dt><dd>Researchers from the tabular and relational communities, and junior researchers from other fields looking for open problems.</dd></div>
+        <div><dt>You leave with</dt><dd>Research directions, paper ideas, and new collaborators.</dd></div>
       </dl>
     </div>
   </section>
@@ -414,7 +416,7 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
             <tr class="break"><td>0:55–1:10</td><td><span class="kind kind-break" aria-hidden="true"></span>Break</td><td>Informal networking</td></tr>
             <tr><td>1:10–1:40</td><td><span class="kind kind-talk" aria-hidden="true"></span>Lightning talks, part 2</td><td>Three 10-minute visionary research talks</td></tr>
             <tr><td>1:40–2:00</td><td><span class="kind kind-discuss" aria-hidden="true"></span>Group discussion</td><td>Plenary Q&amp;A and closing reflection</td></tr>
-            <tr class="later"><td>16:30–18:30</td><td><span class="kind kind-poster" aria-hidden="true"></span>Poster session</td><td>Late-breaking posters in the UnConference poster session</td></tr>
+            <tr class="later"><td>16:30–18:30</td><td><span class="kind kind-poster" aria-hidden="true"></span>Poster session</td><td>In-person late-breaking posters in the UnConference poster session</td></tr>
           </tbody>
         </table>
       </div>
@@ -424,23 +426,27 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
   <section class="section section-band" id="posters">
     <div class="wrap">
       <div class="section-head">
-        <h2>Call for late-breaking posters</h2>
-        <p>Bring your newest work on AI for tabular and relational data to Paris.</p>
+        <h2>Call for in-person late-breaking posters</h2>
+        <p>Coming to the ELLIS UnConference? Bring your newest work on AI for tabular and relational data.</p>
       </div>
       <div class="cfp">
         <div class="prose">
-          <p>We invite in-person attendees to present <strong>late-breaking research</strong>: work that has not been presented at any prior workshop or conference. This complements the UnConference’s general call for posters, which is for recently accepted papers.</p>
+          <p>We are looking to host <strong>late-breaking posters</strong> from people attending the UnConference in person. Late-breaking means work that has not been presented at any prior workshop or conference. This complements the UnConference’s general call for posters, which is for recently accepted papers.</p>
           <dl class="kv">
             <div><dt>Submit</dt><dd>A title and an abstract through the submission form.</dd></div>
             <div><dt>Topics</dt><dd>Anything in the session’s scope, for example tabular foundation models, relational deep learning, spreadsheets and multi-table data, LLMs and agents for data science, multi-modal learning with tables, benchmarks, and efficiency.</dd></div>
             <div><dt>Review</dt><dd>The organizers check each submission for scope and quality.</dd></div>
-            <div><dt>Format</dt><dd>In person only. Accepted posters are not archived and not listed online.</dd></div>
-            <div><dt>Attend</dt><dd>The presenting author registers for the <a href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">ELLIS UnConference</a> and prints their own poster.</dd></div>
+            <div><dt>Format</dt><dd>In person only, in the UnConference poster session. There is no remote option. Accepted posters are not archived and not listed online.</dd></div>
+            <div><dt>Attend</dt><dd>The presenting author registers for the <a href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">ELLIS UnConference</a>, attends in Paris, and prints their own poster.</dd></div>
           </dl>
-          <div class="actions">
-            <!-- TODO: once the Google Form exists, replace this note with
-                 <a class="btn btn-primary" href="https://forms.gle/..." target="_blank" rel="noopener">Submit a poster</a> -->
-            <p class="note">The submission form opens here on 21 November 2026.</p>
+          <div class="cta">
+            <div class="actions">
+              <!-- TODO: once the Google Form exists, replace this note with
+                   <a class="btn btn-primary" href="https://forms.gle/..." target="_blank" rel="noopener">Submit a poster</a> -->
+              <p class="note">The submission form opens here on 21 November 2026.</p>
+              <a class="btn" href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">Register for the UnConference</a>
+            </div>
+            <p class="fine">Only for people attending the ELLIS UnConference in person. Submitting a poster here does not register you for the UnConference; register separately through its registration page.</p>
           </div>
         </div>
         <aside class="dates" aria-labelledby="dates-title">
