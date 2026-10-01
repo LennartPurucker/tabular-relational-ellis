@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap">
 <style>
-/* Layout: one left-aligned column (max 70rem). Hero = title + key facts on the left, a spreadsheet on the right
-   whose last column is still empty. Key/value rows with cell rules are the recurring device. */
+/* Layout: one left-aligned column (max 70rem). Hero = title + key facts on the left, two linked tables on the right,
+   one with an empty "what's next?" column. Key/value rows with cell rules are the recurring device. */
 :root {
   --paper: #ffffff;
   --band: #edf3ff;
@@ -132,26 +132,27 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
   .kv dd { padding-top: 0.15rem; }
 }
 
-/* Spreadsheet figure */
-.sheet { margin: 0; min-width: 0; }
-.sheet svg { display: block; width: 100%; max-width: 30rem; height: auto; margin-inline: auto; overflow: visible; }
-.sheet text { font-family: var(--display); font-size: 11px; font-weight: 600; fill: var(--ink-2); }
-.sheet .hdr { fill: var(--cell); stroke: var(--rule); stroke-width: 1; }
-.sheet .hdr-on { fill: color-mix(in srgb, var(--sun) 55%, var(--cell)); stroke: var(--rule); stroke-width: 1; }
-.sheet .cell { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
-.sheet .empty { fill: var(--paper); stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; }
-.sheet .field { fill: var(--ink); opacity: 0.75; }
-.sheet .bar { fill: var(--blue); }
-.sheet .txt { fill: var(--ink-2); opacity: 0.45; }
-.sheet .coral { fill: var(--coral); }
-.sheet .mint { fill: var(--mint); }
-.sheet .sun { fill: var(--sun); }
-.sheet .off { fill: none; stroke: var(--mint); stroke-width: 2; }
-.sheet .active { fill: var(--sun); stroke: var(--ink); stroke-width: 2; }
-.sheet .handle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.5; }
-.sheet .caret { fill: var(--sun-ink); animation: blink 1.1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .sheet .caret { animation: none; } }
+/* Schema figure: a users table with an empty "what's next?" column, linked to an orders table */
+.schema { margin: 0; min-width: 0; }
+.schema svg { display: block; width: 100%; max-width: 30rem; height: auto; margin-inline: auto; overflow: visible; }
+.schema text { font-family: var(--display); font-size: 13px; fill: var(--ink); font-variant-numeric: tabular-nums; }
+.schema .cap { font-weight: 700; }
+.schema .hd { font-weight: 600; fill: var(--ink-2); }
+.schema .note { font-size: 11.5px; font-style: italic; fill: var(--ink-2); }
+.schema .hdbox { fill: var(--cell); stroke: var(--rule); stroke-width: 1; }
+.schema .cellbox { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
+.schema .frame { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.schema .fk { fill: none; stroke: var(--coral); stroke-width: 2; }
+.schema .dot { fill: var(--coral); }
+.schema .link { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.schema .next-hd { fill: var(--sun); }
+.schema .next-label { font-size: 14px; font-weight: 700; fill: var(--sun-ink); }
+.schema .next-body { fill: color-mix(in srgb, var(--sun) 22%, var(--paper)); }
+.schema .next-row { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
+.schema .big-q { font-size: 80px; font-weight: 800; fill: var(--blue); paint-order: stroke;
+  stroke: color-mix(in srgb, var(--sun) 22%, var(--paper)); stroke-width: 8px; stroke-linejoin: round; }
+.schema .selected { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.schema .handle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.5; }
 
 /* Sections */
 .section { padding-block: clamp(3rem, 7vw, 5rem); }
@@ -264,61 +265,48 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
       </div>
     </div>
 
-    <figure class="sheet">
-      <svg viewBox="0 0 432 222" role="img" aria-labelledby="sheet-title">
-        <title id="sheet-title">A spreadsheet with four filled columns of numbers, categories, text, and yes/no values, and a fifth column that is still empty, with its first cell selected.</title>
+    <figure class="schema">
+      <svg viewBox="0 0 360 352" role="img" aria-labelledby="schema-title">
+        <title id="schema-title">A users table linked by a foreign key to an orders table. The users table has an extra column called what's next, which is empty except for a big question mark.</title>
 
-        <!-- column and row headers -->
-        <rect class="hdr" x="0" y="0" width="28" height="22"/>
-        <rect class="hdr" x="28" y="0" width="78" height="22"/><rect class="hdr" x="106" y="0" width="78" height="22"/>
-        <rect class="hdr" x="184" y="0" width="78" height="22"/><rect class="hdr" x="262" y="0" width="78" height="22"/>
-        <rect class="hdr-on" x="340" y="0" width="82" height="22"/>
-        <text x="67" y="15" text-anchor="middle">A</text><text x="145" y="15" text-anchor="middle">B</text>
-        <text x="223" y="15" text-anchor="middle">C</text><text x="301" y="15" text-anchor="middle">D</text>
-        <text x="381" y="15" text-anchor="middle">E</text>
-        <rect class="hdr" x="0" y="22" width="28" height="32"/><rect class="hdr" x="0" y="54" width="28" height="32"/>
-        <rect class="hdr" x="0" y="86" width="28" height="32"/><rect class="hdr" x="0" y="118" width="28" height="32"/>
-        <rect class="hdr" x="0" y="150" width="28" height="32"/><rect class="hdr" x="0" y="182" width="28" height="32"/>
-        <text x="14" y="42" text-anchor="middle">1</text><text x="14" y="74" text-anchor="middle">2</text>
-        <text x="14" y="106" text-anchor="middle">3</text><text x="14" y="138" text-anchor="middle">4</text>
-        <text x="14" y="170" text-anchor="middle">5</text><text x="14" y="202" text-anchor="middle">6</text>
+        <!-- users -->
+        <text class="cap" x="20" y="24">users</text>
+        <rect class="hdbox" x="20" y="34" width="50" height="30"/><rect class="hdbox" x="70" y="34" width="55" height="30"/><rect class="hdbox" x="125" y="34" width="75" height="30"/>
+        <text class="hd" x="45" y="54" text-anchor="middle">id</text><text class="hd" x="97.5" y="54" text-anchor="middle">age</text><text class="hd" x="162.5" y="54" text-anchor="middle">country</text>
+        <rect class="cellbox" x="20" y="64" width="50" height="30"/><rect class="cellbox" x="70" y="64" width="55" height="30"/><rect class="cellbox" x="125" y="64" width="75" height="30"/>
+        <text x="45" y="84" text-anchor="middle">1</text><text x="97.5" y="84" text-anchor="middle">34</text><text x="162.5" y="84" text-anchor="middle">FR</text>
+        <rect class="cellbox" x="20" y="94" width="50" height="30"/><rect class="cellbox" x="70" y="94" width="55" height="30"/><rect class="cellbox" x="125" y="94" width="75" height="30"/>
+        <text x="45" y="114" text-anchor="middle">2</text><text x="97.5" y="114" text-anchor="middle">51</text><text x="162.5" y="114" text-anchor="middle">DE</text>
+        <rect class="cellbox" x="20" y="124" width="50" height="30"/><rect class="cellbox" x="70" y="124" width="55" height="30"/><rect class="cellbox" x="125" y="124" width="75" height="30"/>
+        <text x="45" y="144" text-anchor="middle">3</text><text x="97.5" y="144" text-anchor="middle">27</text><text x="162.5" y="144" text-anchor="middle">NL</text>
+        <rect class="frame" x="20" y="34" width="180" height="120"/>
 
-        <!-- filled cells, columns A–D -->
-        <g>
-          <rect class="cell" x="28" y="22" width="78" height="32"/><rect class="cell" x="106" y="22" width="78" height="32"/><rect class="cell" x="184" y="22" width="78" height="32"/><rect class="cell" x="262" y="22" width="78" height="32"/>
-          <rect class="cell" x="28" y="54" width="78" height="32"/><rect class="cell" x="106" y="54" width="78" height="32"/><rect class="cell" x="184" y="54" width="78" height="32"/><rect class="cell" x="262" y="54" width="78" height="32"/>
-          <rect class="cell" x="28" y="86" width="78" height="32"/><rect class="cell" x="106" y="86" width="78" height="32"/><rect class="cell" x="184" y="86" width="78" height="32"/><rect class="cell" x="262" y="86" width="78" height="32"/>
-          <rect class="cell" x="28" y="118" width="78" height="32"/><rect class="cell" x="106" y="118" width="78" height="32"/><rect class="cell" x="184" y="118" width="78" height="32"/><rect class="cell" x="262" y="118" width="78" height="32"/>
-          <rect class="cell" x="28" y="150" width="78" height="32"/><rect class="cell" x="106" y="150" width="78" height="32"/><rect class="cell" x="184" y="150" width="78" height="32"/><rect class="cell" x="262" y="150" width="78" height="32"/>
-          <rect class="cell" x="28" y="182" width="78" height="32"/><rect class="cell" x="106" y="182" width="78" height="32"/><rect class="cell" x="184" y="182" width="78" height="32"/><rect class="cell" x="262" y="182" width="78" height="32"/>
-        </g>
-        <!-- row 1: field names -->
-        <rect class="field" x="38" y="35" width="40" height="6" rx="3"/><rect class="field" x="116" y="35" width="30" height="6" rx="3"/>
-        <rect class="field" x="194" y="35" width="46" height="6" rx="3"/><rect class="field" x="272" y="35" width="34" height="6" rx="3"/>
-        <!-- A: numbers as data bars -->
-        <rect class="bar" x="36" y="64" width="56" height="12" rx="2"/><rect class="bar" x="36" y="96" width="30" height="12" rx="2"/>
-        <rect class="bar" x="36" y="128" width="44" height="12" rx="2"/><rect class="bar" x="36" y="160" width="18" height="12" rx="2"/>
-        <rect class="bar" x="36" y="192" width="38" height="12" rx="2"/>
-        <!-- B: categories as chips -->
-        <rect class="coral" x="116" y="63" width="34" height="14" rx="7"/><rect class="mint" x="116" y="95" width="34" height="14" rx="7"/>
-        <rect class="coral" x="116" y="127" width="34" height="14" rx="7"/><rect class="sun" x="116" y="159" width="34" height="14" rx="7"/>
-        <rect class="mint" x="116" y="191" width="34" height="14" rx="7"/>
-        <!-- C: free text -->
-        <rect class="txt" x="194" y="67" width="52" height="6" rx="3"/><rect class="txt" x="194" y="99" width="36" height="6" rx="3"/>
-        <rect class="txt" x="194" y="131" width="58" height="6" rx="3"/><rect class="txt" x="194" y="163" width="28" height="6" rx="3"/>
-        <rect class="txt" x="194" y="195" width="44" height="6" rx="3"/>
-        <!-- D: yes/no -->
-        <circle class="mint" cx="301" cy="70" r="6"/><circle class="off" cx="301" cy="102" r="5"/>
-        <circle class="mint" cx="301" cy="134" r="6"/><circle class="mint" cx="301" cy="166" r="6"/>
-        <circle class="off" cx="301" cy="198" r="5"/>
+        <!-- the new, still empty column -->
+        <rect class="next-hd" x="200" y="34" width="140" height="30"/>
+        <text class="next-label" x="270" y="54" text-anchor="middle">what’s next?</text>
+        <rect class="next-body" x="200" y="64" width="140" height="90"/>
+        <line class="next-row" x1="200" y1="94" x2="340" y2="94"/><line class="next-row" x1="200" y1="124" x2="340" y2="124"/>
+        <text class="big-q" x="270" y="138" text-anchor="middle">?</text>
+        <rect class="selected" x="200" y="34" width="140" height="120"/>
+        <rect class="handle" x="336" y="150" width="8" height="8"/>
 
-        <!-- E: the column nobody has filled in yet -->
-        <rect class="empty" x="340" y="54" width="82" height="32"/><rect class="empty" x="340" y="86" width="82" height="32"/>
-        <rect class="empty" x="340" y="118" width="82" height="32"/><rect class="empty" x="340" y="150" width="82" height="32"/>
-        <rect class="empty" x="340" y="182" width="82" height="32"/>
-        <rect class="active" x="340" y="22" width="82" height="32"/>
-        <rect class="caret" x="350" y="30" width="1.75" height="16"/>
-        <rect class="handle" x="418.5" y="50.5" width="7" height="7"/>
+        <!-- orders -->
+        <text class="cap" x="60" y="212">orders</text>
+        <rect class="hdbox" x="60" y="222" width="60" height="30"/><rect class="hdbox" x="120" y="222" width="55" height="30"/><rect class="hdbox" x="175" y="222" width="75" height="30"/>
+        <text class="hd" x="90" y="242" text-anchor="middle">order</text><text class="hd" x="147.5" y="242" text-anchor="middle">user</text><text class="hd" x="212.5" y="242" text-anchor="middle">total</text>
+        <rect class="cellbox" x="60" y="252" width="60" height="30"/><rect class="cellbox" x="120" y="252" width="55" height="30"/><rect class="cellbox" x="175" y="252" width="75" height="30"/>
+        <text x="90" y="272" text-anchor="middle">17</text><text x="147.5" y="272" text-anchor="middle">1</text><text x="212.5" y="272" text-anchor="middle">42.00</text>
+        <rect class="cellbox" x="60" y="282" width="60" height="30"/><rect class="cellbox" x="120" y="282" width="55" height="30"/><rect class="cellbox" x="175" y="282" width="75" height="30"/>
+        <text x="90" y="302" text-anchor="middle">18</text><text x="147.5" y="302" text-anchor="middle">3</text><text x="212.5" y="302" text-anchor="middle">7.50</text>
+        <rect class="cellbox" x="60" y="312" width="60" height="30"/><rect class="cellbox" x="120" y="312" width="55" height="30"/><rect class="cellbox" x="175" y="312" width="75" height="30"/>
+        <text x="90" y="332" text-anchor="middle">19</text><text x="147.5" y="332" text-anchor="middle">1</text><text x="212.5" y="332" text-anchor="middle">19.90</text>
+        <rect class="frame" x="60" y="222" width="190" height="120"/>
+
+        <!-- foreign key orders.user -> users.id, and orders feeding the open question -->
+        <path class="fk" d="M147.5 222 C147.5 188 45 192 45 154"/>
+        <circle class="dot" cx="147.5" cy="222" r="3.5"/><circle class="dot" cx="45" cy="154" r="3.5"/>
+        <text class="note" x="58" y="188">foreign key</text>
+        <path class="link" d="M250 282 C300 282 300 214 300 162"/>
       </svg>
     </figure>
   </div>
