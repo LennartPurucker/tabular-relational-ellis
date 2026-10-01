@@ -211,14 +211,13 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
 
 /* Organizers: one row per person */
 .org-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
-.org { display: grid; grid-template-columns: 3rem minmax(0, 15rem) minmax(0, 1fr); gap: 0.5rem 1.5rem; align-items: center; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
+.org { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; align-items: center; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
 .org .avatar { width: 3rem; height: 3rem; font-size: 0.9rem; }
 .org h3 { font-size: 1.05rem; }
-.org .aff { font-size: var(--step--1); color: var(--ink-2); line-height: 1.35; }
-.org .focus { font-size: 0.98rem; line-height: 1.45; }
-@media (max-width: 40rem) {
-  .org { grid-template-columns: 3rem minmax(0, 1fr); align-items: start; }
-  .org .focus { grid-column: 2; }
+.org .aff { font-size: var(--step--1); color: var(--ink-2); line-height: 1.35; margin-top: 0.15rem; }
+@media (min-width: 60rem) {
+  .org-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 1.5rem; border-top: 0; }
+  .org { grid-template-columns: minmax(0, 1fr); align-items: start; gap: 0.75rem; padding-block: 1rem 0; border-top: 1px solid var(--rule); border-bottom: 0; }
 }
 
 /* Footer */
@@ -471,27 +470,22 @@ h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth"
         <li class="org">
           <span class="avatar c-blue" aria-hidden="true">LP</span>
           <div><h3><a href="https://ml.informatik.uni-freiburg.de/profile/purucker/" target="_blank" rel="noopener">Lennart Purucker</a></h3><p class="aff">Prior Labs, University of Freiburg</p></div>
-          <p class="focus">Tabular foundation models and benchmarking (TabArena, AutoGluon, OpenML, TabPFN)</p>
         </li>
         <li class="org">
           <span class="avatar c-coral" aria-hidden="true">MH</span>
           <div><h3><a href="https://www.madelonhulsebos.com" target="_blank" rel="noopener">Madelon Hulsebos</a></h3><p class="aff">CWI Amsterdam</p></div>
-          <p class="focus">Leads the TRL Lab on tabular data processing and reasoning; founded the Table Representation Learning workshop series</p>
         </li>
         <li class="org">
           <span class="avatar c-mint" aria-hidden="true">MS</span>
           <div><h3><a href="https://maxschambach.github.io/" target="_blank" rel="noopener">Maximilian Schambach</a></h3><p class="aff">SAP</p></div>
-          <p class="focus">Leads SAP’s tabular foundation models workstream (ConTextTab, RPT)</p>
         </li>
         <li class="org">
           <span class="avatar c-sun" aria-hidden="true">DH</span>
           <div><h3><a href="https://dholzmueller.github.io/" target="_blank" rel="noopener">David Holzmüller</a></h3><p class="aff">Inria Saclay</p></div>
-          <p class="focus">Tabular foundation models and classical ML methods (TabICL, RealMLP, TabArena)</p>
         </li>
         <li class="org">
           <span class="avatar c-blue" aria-hidden="true">FL</span>
           <div><h3><a href="https://flefebv.github.io/" target="_blank" rel="noopener">Félix Lefebvre</a></h3><p class="aff">Inria Saclay</p></div>
-          <p class="focus">Knowledge integration for tabular learning and knowledge graph embeddings</p>
         </li>
       </ul>
     </div>
