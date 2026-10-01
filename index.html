@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI for Tabular &amp; Relational Data: What's Next? | ELLIS UnConference 2026</title>
+<meta name="description" content="A two-hour session at the ELLIS UnConference 2026 in Paris on the future of AI for tabular and relational data: lightning talks, open discussion, and late-breaking posters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,400&display=swap">
+<style>
+/* Layout: one left-aligned column (max 70rem). Hero = title + key facts on the left, a spreadsheet on the right
+   whose last column is still empty. Key/value rows with cell rules are the recurring device. */
+:root {
+  --paper: #ffffff;
+  --band: #edf3ff;
+  --ink: #1a2147;
+  --ink-2: #525c82;
+  --rule: #d2dbf0;
+  --cell: #e2e9fa;
+  --blue: #2f5cf6;
+  --on-blue: #ffffff;
+  --sun: #ffc928;
+  --sun-ink: #1a2147;
+  --coral: #ff6f61;
+  --mint: #1fbf9a;
+  --link: #2a50e0;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --text: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3125rem;
+  --step-2: 1.75rem;
+  --step-3: clamp(2.25rem, 1.4rem + 3.6vw, 3.75rem);
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --measure: 66ch;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1330; --band: #131b42; --ink: #eef1ff; --ink-2: #aab3d8; --rule: #2a3566; --cell: #1b2452;
+    --blue: #7b95ff; --on-blue: #0d1330; --sun: #ffd24d; --sun-ink: #1a2147; --coral: #ff8a7e; --mint: #45d6b3;
+    --link: #9fb4ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0d1330; --band: #131b42; --ink: #eef1ff; --ink-2: #aab3d8; --rule: #2a3566; --cell: #1b2452;
+  --blue: #7b95ff; --on-blue: #0d1330; --sun: #ffd24d; --sun-ink: #1a2147; --coral: #ff8a7e; --mint: #45d6b3;
+  --link: #9fb4ff;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: var(--step-0);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; }
+a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: var(--step-2); letter-spacing: -0.01em; }
+h3 { font-size: var(--step-1); font-weight: 650; }
+p { margin: 0; }
+
+.wrap { max-width: 70rem; margin-inline: auto; padding-inline: var(--gutter); }
+
+/* Nav */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav .wrap { display: flex; align-items: center; gap: 1.5rem; min-height: 3.75rem; }
+.nav-brand { font-family: var(--display); font-weight: 700; font-size: 1rem; color: var(--ink); text-decoration: none; margin-right: auto; }
+.nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; font-family: var(--display); font-size: 0.95rem; }
+.nav ul a { color: var(--ink-2); text-decoration: none; }
+.nav ul a:hover { color: var(--blue); }
+@media (max-width: 54rem) { .nav ul { display: none; } }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--display); font-weight: 600; font-size: 1rem; line-height: 1;
+  padding: 0.85rem 1.2rem; border-radius: 6px; text-decoration: none;
+  color: var(--blue); border: 1.5px solid var(--blue); background: transparent;
+}
+.btn:hover { background: var(--paper); }
+.btn-primary { background: var(--blue); color: var(--on-blue); box-shadow: 3px 3px 0 var(--sun); }
+.btn-primary:hover { background: var(--blue); transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--sun); }
+.nav .btn { padding: 0.6rem 0.9rem; font-size: 0.9rem; box-shadow: none; }
+.nav .btn-primary:hover { transform: none; }
+.note { font-family: var(--display); font-size: var(--step--1); color: var(--ink-2); }
+
+/* Hero */
+.hero { background: var(--band); padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+@media (max-width: 54rem) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } }
+.hero-text { display: grid; gap: 1.5rem; min-width: 0; }
+.host { font-family: var(--display); font-size: 1rem; color: var(--ink-2); }
+.host a { color: inherit; }
+h1 { font-size: var(--step-3); font-weight: 750; font-variation-settings: "wdth" 88; letter-spacing: -0.02em; line-height: 1.02; }
+.lede { font-size: var(--step-1); line-height: 1.5; color: var(--ink-2); max-width: 34ch; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+
+/* Key/value rows: the site's one structural device, drawn like table cells */
+.kv { display: grid; grid-template-columns: max-content minmax(0, 1fr); margin: 0; border-top: 1px solid var(--rule); }
+.kv > div { display: contents; }
+.kv dt, .kv dd { margin: 0; padding: 0.7rem 0; border-bottom: 1px solid var(--rule); }
+.kv dt { font-family: var(--display); font-weight: 600; padding-right: 1.5rem; }
+.kv dd small { display: block; color: var(--ink-2); font-size: var(--step--1); }
+.kv-wide dt { min-width: 10rem; }
+@media (max-width: 34rem) {
+  .kv { grid-template-columns: minmax(0, 1fr); }
+  .kv dt { border-bottom: 0; padding-bottom: 0; }
+  .kv dd { padding-top: 0.15rem; }
+}
+
+/* Spreadsheet figure */
+.sheet { margin: 0; min-width: 0; }
+.sheet svg { display: block; width: 100%; max-width: 30rem; height: auto; margin-inline: auto; overflow: visible; }
+.sheet text { font-family: var(--display); font-size: 11px; font-weight: 600; fill: var(--ink-2); }
+.sheet .hdr { fill: var(--cell); stroke: var(--rule); stroke-width: 1; }
+.sheet .hdr-on { fill: color-mix(in srgb, var(--sun) 55%, var(--cell)); stroke: var(--rule); stroke-width: 1; }
+.sheet .cell { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
+.sheet .empty { fill: var(--paper); stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; }
+.sheet .field { fill: var(--ink); opacity: 0.75; }
+.sheet .bar { fill: var(--blue); }
+.sheet .txt { fill: var(--ink-2); opacity: 0.45; }
+.sheet .coral { fill: var(--coral); }
+.sheet .mint { fill: var(--mint); }
+.sheet .sun { fill: var(--sun); }
+.sheet .off { fill: none; stroke: var(--mint); stroke-width: 2; }
+.sheet .active { fill: var(--sun); stroke: var(--ink); stroke-width: 2; }
+.sheet .handle { fill: var(--ink); stroke: var(--paper); stroke-width: 1.5; }
+.sheet .caret { fill: var(--sun-ink); animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .sheet .caret { animation: none; } }
+
+/* Sections */
+.section { padding-block: clamp(3rem, 7vw, 5rem); }
+.section-band { background: var(--band); }
+.section .wrap { display: grid; gap: 1.75rem; }
+.section-head { display: grid; gap: 0.75rem; max-width: var(--measure); }
+.section-head p { color: var(--ink-2); }
+.prose { display: grid; gap: 1rem; max-width: var(--measure); }
+
+/* People */
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem 2.5rem; list-style: none; margin: 0; padding: 0; }
+@media (max-width: 54rem) { .people { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 34rem) { .people { grid-template-columns: minmax(0, 1fr); } }
+.person { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; align-items: start; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.person h3 { font-size: 1.15rem; }
+.person h3 a, .org h3 a { color: var(--ink); text-decoration: none; }
+.person h3 a:hover, .org h3 a:hover { color: var(--blue); text-decoration: underline; }
+.person .aff { font-size: var(--step--1); color: var(--ink-2); line-height: 1.4; margin-top: 0.2rem; }
+.person .topic { font-size: 0.98rem; margin-top: 0.5rem; line-height: 1.45; }
+.avatar {
+  position: relative; width: 4rem; height: 4rem; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center; background: var(--cell); color: var(--ink);
+  font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+}
+.avatar.c-blue { background: color-mix(in srgb, var(--blue) 22%, var(--paper)); }
+.avatar.c-coral { background: color-mix(in srgb, var(--coral) 28%, var(--paper)); }
+.avatar.c-mint { background: color-mix(in srgb, var(--mint) 28%, var(--paper)); }
+.avatar.c-sun { background: color-mix(in srgb, var(--sun) 45%, var(--paper)); }
+/* Drop a photo in img/ and add <img src="img/name.jpg" alt=""> inside .avatar; it covers the initials. */
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.person-tba .avatar { background: transparent; border: 1.5px dashed var(--ink-2); color: var(--ink-2); }
+.person-tba h3 { color: var(--ink-2); font-weight: 600; }
+
+/* Schedule table */
+.table-scroll { overflow-x: auto; }
+.schedule { width: 100%; border-collapse: collapse; min-width: 34rem; }
+.schedule th, .schedule td { text-align: left; padding: 0.8rem 1rem 0.8rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.schedule thead th { font-family: var(--display); font-weight: 600; font-size: var(--step--1); color: var(--ink-2); border-bottom: 2px solid var(--blue); }
+.schedule td:first-child { font-family: var(--display); font-variant-numeric: tabular-nums; white-space: nowrap; width: 9rem; color: var(--ink-2); }
+.schedule td:nth-child(2) { font-family: var(--display); font-weight: 600; width: 15rem; }
+.schedule tr.later td { border-top: 1.5px dashed var(--rule); }
+.schedule tr.break td { color: var(--ink-2); }
+.schedule tr.break td:nth-child(2) { font-weight: 500; }
+.kind { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 2px; margin-right: 0.6rem; background: var(--ink-2); }
+.kind-talk { background: var(--blue); }
+.kind-discuss { background: var(--mint); }
+.kind-break { background: transparent; border: 1.5px solid var(--ink-2); }
+.kind-poster { background: var(--sun); }
+
+/* Call for posters */
+.cfp { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (max-width: 54rem) { .cfp { grid-template-columns: minmax(0, 1fr); } }
+.dates { display: grid; gap: 1.25rem; padding: 1.5rem; background: var(--paper); border: 2px solid var(--blue); border-radius: 6px; }
+.dates h3 { font-size: 1.15rem; }
+.dates .kv { border-top: 0; }
+.dates .kv > div:last-child dt, .dates .kv > div:last-child dd { border-bottom: 0; }
+
+/* Organizers: one row per person */
+.org-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.org { display: grid; grid-template-columns: 3rem minmax(0, 15rem) minmax(0, 1fr); gap: 0.5rem 1.5rem; align-items: center; padding-block: 0.9rem; border-bottom: 1px solid var(--rule); }
+.org .avatar { width: 3rem; height: 3rem; font-size: 0.9rem; }
+.org h3 { font-size: 1.05rem; }
+.org .aff { font-size: var(--step--1); color: var(--ink-2); line-height: 1.35; }
+.org .focus { font-size: 0.98rem; line-height: 1.45; }
+@media (max-width: 40rem) {
+  .org { grid-template-columns: 3rem minmax(0, 1fr); align-items: start; }
+  .org .focus { grid-column: 2; }
+}
+
+/* Footer */
+.footer { padding-block: 2.5rem 3rem; border-top: 1px solid var(--rule); font-size: var(--step--1); color: var(--ink-2); }
+.footer .wrap { display: grid; gap: 0.6rem; }
+.footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="nav-brand" href="#top">Tabular &amp; Relational @ ELLIS</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#posters">Posters</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+    </ul>
+    <!-- TODO: once the Google Form exists, point this at its public link (forms.gle/...) -->
+    <a class="btn btn-primary" href="#posters">Submit a poster</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="host">A session at the <a href="https://ellis-unconference.github.io/" target="_blank" rel="noopener">ELLIS UnConference 2026</a> in Paris</p>
+      <h1>AI for Tabular &amp; Relational Data: What’s Next?</h1>
+      <p class="lede">Two hours of lightning talks, open discussion, and late-breaking posters on where structured-data research goes from here.</p>
+      <dl class="kv">
+        <div><dt>When</dt><dd>Tuesday 8 December 2026<small>Morning (10:30–12:30) or afternoon (14:00–16:00), announced by the UnConference</small></dd></div>
+        <div><dt>Where</dt><dd>Palais des Congrès de Paris<small>2 Place de la Porte Maillot, 75017 Paris</small></dd></div>
+        <div><dt>Posters</dt><dd>Submissions open 21 November<small>Due Sunday 29 November 2026, AoE</small></dd></div>
+      </dl>
+      <div class="actions">
+        <!-- TODO: once the Google Form exists, point this at its public link (forms.gle/...) -->
+        <a class="btn btn-primary" href="#posters">Submit a poster</a>
+        <a class="btn" href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">Register for the UnConference</a>
+      </div>
+    </div>
+
+    <figure class="sheet">
+      <svg viewBox="0 0 432 222" role="img" aria-labelledby="sheet-title">
+        <title id="sheet-title">A spreadsheet with four filled columns of numbers, categories, text, and yes/no values, and a fifth column that is still empty, with its first cell selected.</title>
+
+        <!-- column and row headers -->
+        <rect class="hdr" x="0" y="0" width="28" height="22"/>
+        <rect class="hdr" x="28" y="0" width="78" height="22"/><rect class="hdr" x="106" y="0" width="78" height="22"/>
+        <rect class="hdr" x="184" y="0" width="78" height="22"/><rect class="hdr" x="262" y="0" width="78" height="22"/>
+        <rect class="hdr-on" x="340" y="0" width="82" height="22"/>
+        <text x="67" y="15" text-anchor="middle">A</text><text x="145" y="15" text-anchor="middle">B</text>
+        <text x="223" y="15" text-anchor="middle">C</text><text x="301" y="15" text-anchor="middle">D</text>
+        <text x="381" y="15" text-anchor="middle">E</text>
+        <rect class="hdr" x="0" y="22" width="28" height="32"/><rect class="hdr" x="0" y="54" width="28" height="32"/>
+        <rect class="hdr" x="0" y="86" width="28" height="32"/><rect class="hdr" x="0" y="118" width="28" height="32"/>
+        <rect class="hdr" x="0" y="150" width="28" height="32"/><rect class="hdr" x="0" y="182" width="28" height="32"/>
+        <text x="14" y="42" text-anchor="middle">1</text><text x="14" y="74" text-anchor="middle">2</text>
+        <text x="14" y="106" text-anchor="middle">3</text><text x="14" y="138" text-anchor="middle">4</text>
+        <text x="14" y="170" text-anchor="middle">5</text><text x="14" y="202" text-anchor="middle">6</text>
+
+        <!-- filled cells, columns A–D -->
+        <g>
+          <rect class="cell" x="28" y="22" width="78" height="32"/><rect class="cell" x="106" y="22" width="78" height="32"/><rect class="cell" x="184" y="22" width="78" height="32"/><rect class="cell" x="262" y="22" width="78" height="32"/>
+          <rect class="cell" x="28" y="54" width="78" height="32"/><rect class="cell" x="106" y="54" width="78" height="32"/><rect class="cell" x="184" y="54" width="78" height="32"/><rect class="cell" x="262" y="54" width="78" height="32"/>
+          <rect class="cell" x="28" y="86" width="78" height="32"/><rect class="cell" x="106" y="86" width="78" height="32"/><rect class="cell" x="184" y="86" width="78" height="32"/><rect class="cell" x="262" y="86" width="78" height="32"/>
+          <rect class="cell" x="28" y="118" width="78" height="32"/><rect class="cell" x="106" y="118" width="78" height="32"/><rect class="cell" x="184" y="118" width="78" height="32"/><rect class="cell" x="262" y="118" width="78" height="32"/>
+          <rect class="cell" x="28" y="150" width="78" height="32"/><rect class="cell" x="106" y="150" width="78" height="32"/><rect class="cell" x="184" y="150" width="78" height="32"/><rect class="cell" x="262" y="150" width="78" height="32"/>
+          <rect class="cell" x="28" y="182" width="78" height="32"/><rect class="cell" x="106" y="182" width="78" height="32"/><rect class="cell" x="184" y="182" width="78" height="32"/><rect class="cell" x="262" y="182" width="78" height="32"/>
+        </g>
+        <!-- row 1: field names -->
+        <rect class="field" x="38" y="35" width="40" height="6" rx="3"/><rect class="field" x="116" y="35" width="30" height="6" rx="3"/>
+        <rect class="field" x="194" y="35" width="46" height="6" rx="3"/><rect class="field" x="272" y="35" width="34" height="6" rx="3"/>
+        <!-- A: numbers as data bars -->
+        <rect class="bar" x="36" y="64" width="56" height="12" rx="2"/><rect class="bar" x="36" y="96" width="30" height="12" rx="2"/>
+        <rect class="bar" x="36" y="128" width="44" height="12" rx="2"/><rect class="bar" x="36" y="160" width="18" height="12" rx="2"/>
+        <rect class="bar" x="36" y="192" width="38" height="12" rx="2"/>
+        <!-- B: categories as chips -->
+        <rect class="coral" x="116" y="63" width="34" height="14" rx="7"/><rect class="mint" x="116" y="95" width="34" height="14" rx="7"/>
+        <rect class="coral" x="116" y="127" width="34" height="14" rx="7"/><rect class="sun" x="116" y="159" width="34" height="14" rx="7"/>
+        <rect class="mint" x="116" y="191" width="34" height="14" rx="7"/>
+        <!-- C: free text -->
+        <rect class="txt" x="194" y="67" width="52" height="6" rx="3"/><rect class="txt" x="194" y="99" width="36" height="6" rx="3"/>
+        <rect class="txt" x="194" y="131" width="58" height="6" rx="3"/><rect class="txt" x="194" y="163" width="28" height="6" rx="3"/>
+        <rect class="txt" x="194" y="195" width="44" height="6" rx="3"/>
+        <!-- D: yes/no -->
+        <circle class="mint" cx="301" cy="70" r="6"/><circle class="off" cx="301" cy="102" r="5"/>
+        <circle class="mint" cx="301" cy="134" r="6"/><circle class="mint" cx="301" cy="166" r="6"/>
+        <circle class="off" cx="301" cy="198" r="5"/>
+
+        <!-- E: the column nobody has filled in yet -->
+        <rect class="empty" x="340" y="54" width="82" height="32"/><rect class="empty" x="340" y="86" width="82" height="32"/>
+        <rect class="empty" x="340" y="118" width="82" height="32"/><rect class="empty" x="340" y="150" width="82" height="32"/>
+        <rect class="empty" x="340" y="182" width="82" height="32"/>
+        <rect class="active" x="340" y="22" width="82" height="32"/>
+        <rect class="caret" x="350" y="30" width="1.75" height="16"/>
+        <rect class="handle" x="418.5" y="50.5" width="7" height="7"/>
+      </svg>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About the session</h2>
+      </div>
+      <div class="prose">
+        <p>Deep learning and foundation models have transformed language and vision, and have just started to transform tabular and relational data. Tabular foundation models and relational deep learning show that pretraining works for structured data, but it is unclear where this leads. Should the community aim for world models over table-like data, unified models across modalities, or something else? What is missing, and why has it not been solved yet?</p>
+        <p>This session takes stock of these questions at a decisive moment. It brings together the tabular and relational sub-communities, who rarely meet in one room, along with junior researchers from other fields who are looking for interaction points and open problems. The spirit is retrospective and visionary: we look at how the structured-data community got here and where it should go next, beyond the latest technical result.</p>
+      </div>
+      <dl class="kv kv-wide">
+        <div><dt>Scope</dt><dd>Any table-like structured data, including spreadsheets, single and multi-table data, and relational databases, for predictive, analytical, and generative AI.</dd></div>
+        <div><dt>Goal</dt><dd>Identify emerging trends across tabular and relational research and define the next generation of research directions.</dd></div>
+        <div><dt>Why now</dt><dd>Foundation models and deep learning are becoming established for structured data, and what comes next is open.</dd></div>
+        <div><dt>Who should come</dt><dd>Junior and senior researchers from the tabular and relational communities, and junior researchers from other fields.</dd></div>
+        <div><dt>You leave with</dt><dd>An overview of the community’s progress, concrete research directions and paper ideas, and new collaborators across sub-communities.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section-band" id="talks">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Lightning talks</h2>
+        <p>Six 10-minute talks that prioritize visionary thinking and critical reflection over standard technical presentations.</p>
+      </div>
+      <!-- To add a photo: put it in img/ and add <img src="img/papotti.jpg" alt=""> inside the .avatar span. -->
+      <ul class="people">
+        <li class="person">
+          <span class="avatar c-coral" aria-hidden="true">PP</span>
+          <div>
+            <h3><a href="https://papotti.eurecom.io/index.html" target="_blank" rel="noopener">Paolo Papotti</a></h3>
+            <p class="aff">EURECOM</p>
+            <p class="topic">Data management and NLP for tabular and relational data</p>
+          </div>
+        </li>
+        <li class="person">
+          <span class="avatar c-blue" aria-hidden="true">FH</span>
+          <div>
+            <h3><a href="https://ml.informatik.uni-freiburg.de/profile/hutter/" target="_blank" rel="noopener">Frank Hutter</a></h3>
+            <p class="aff">Prior Labs, ELLIS Institute Tübingen, University of Freiburg</p>
+            <p class="topic">Tabular foundation models</p>
+          </div>
+        </li>
+        <li class="person">
+          <span class="avatar c-mint" aria-hidden="true">GV</span>
+          <div>
+            <h3><a href="https://gael-varoquaux.info/about.html" target="_blank" rel="noopener">Gaël Varoquaux</a></h3>
+            <p class="aff">Inria, Probabl</p>
+            <p class="topic">Efficiency for tabular ML</p>
+          </div>
+        </li>
+        <li class="person">
+          <span class="avatar c-sun" aria-hidden="true">MF</span>
+          <div>
+            <h3><a href="https://rusty1s.github.io/#/" target="_blank" rel="noopener">Matthias Fey</a></h3>
+            <p class="aff">NVIDIA</p>
+            <p class="topic">Graph and relational learning</p>
+          </div>
+        </li>
+        <li class="person person-tba">
+          <span class="avatar" aria-hidden="true">?</span>
+          <div>
+            <h3>Speaker to be announced</h3>
+            <p class="topic">Agentic data science</p>
+          </div>
+        </li>
+        <li class="person person-tba">
+          <span class="avatar" aria-hidden="true">?</span>
+          <div>
+            <h3>Speaker to be announced</h3>
+            <p class="topic">Multi-modal learning</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Schedule</h2>
+        <p>Times are relative to the start of our two-hour slot, which the UnConference will announce. Posters are presented later the same day in the UnConference poster session.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="schedule">
+          <thead><tr><th scope="col">Time</th><th scope="col">Session</th><th scope="col">Details</th></tr></thead>
+          <tbody>
+            <tr><td>0:00–0:10</td><td><span class="kind" aria-hidden="true"></span>Opening</td><td>Welcome and agenda overview</td></tr>
+            <tr><td>0:10–0:40</td><td><span class="kind kind-talk" aria-hidden="true"></span>Lightning talks, part 1</td><td>Three 10-minute visionary research talks</td></tr>
+            <tr><td>0:40–0:55</td><td><span class="kind kind-discuss" aria-hidden="true"></span>Group discussion</td><td>Plenary Q&amp;A and reflection</td></tr>
+            <tr class="break"><td>0:55–1:10</td><td><span class="kind kind-break" aria-hidden="true"></span>Break</td><td>Informal networking</td></tr>
+            <tr><td>1:10–1:40</td><td><span class="kind kind-talk" aria-hidden="true"></span>Lightning talks, part 2</td><td>Three 10-minute visionary research talks</td></tr>
+            <tr><td>1:40–2:00</td><td><span class="kind kind-discuss" aria-hidden="true"></span>Group discussion</td><td>Plenary Q&amp;A and closing reflection</td></tr>
+            <tr class="later"><td>16:30–18:30</td><td><span class="kind kind-poster" aria-hidden="true"></span>Poster session</td><td>Late-breaking posters in the UnConference poster session</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-band" id="posters">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Call for late-breaking posters</h2>
+        <p>Bring your newest work on AI for tabular and relational data to Paris.</p>
+      </div>
+      <div class="cfp">
+        <div class="prose">
+          <p>We invite in-person attendees to present <strong>late-breaking research</strong>: work that has not been presented at any prior workshop or conference. This complements the UnConference’s general call for posters, which is for recently accepted papers.</p>
+          <dl class="kv">
+            <div><dt>Submit</dt><dd>A title and an abstract through the submission form.</dd></div>
+            <div><dt>Topics</dt><dd>Anything in the session’s scope, for example tabular foundation models, relational deep learning, spreadsheets and multi-table data, LLMs and agents for data science, multi-modal learning with tables, benchmarks, and efficiency.</dd></div>
+            <div><dt>Review</dt><dd>The organizers check each submission for scope and quality.</dd></div>
+            <div><dt>Format</dt><dd>In person only. Accepted posters are not archived and not listed online.</dd></div>
+            <div><dt>Attend</dt><dd>The presenting author registers for the <a href="https://ellisunconference2026.dakini-pco.com" target="_blank" rel="noopener">ELLIS UnConference</a> and prints their own poster.</dd></div>
+          </dl>
+          <div class="actions">
+            <!-- TODO: once the Google Form exists, replace this note with
+                 <a class="btn btn-primary" href="https://forms.gle/..." target="_blank" rel="noopener">Submit a poster</a> -->
+            <p class="note">The submission form opens here on 21 November 2026.</p>
+          </div>
+        </div>
+        <aside class="dates" aria-labelledby="dates-title">
+          <h3 id="dates-title">Important dates</h3>
+          <dl class="kv">
+            <div><dt>Submissions open</dt><dd>Sat 21 Nov 2026</dd></div>
+            <div><dt>Submission deadline</dt><dd>Sun 29 Nov 2026, AoE</dd></div>
+            <div><dt>Notification</dt><dd>Wed 2 Dec 2026</dd></div>
+            <div><dt>Session and posters</dt><dd>Tue 8 Dec 2026</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="organizers">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Organizers</h2>
+      </div>
+      <ul class="org-list">
+        <li class="org">
+          <span class="avatar c-blue" aria-hidden="true">LP</span>
+          <div><h3><a href="https://ml.informatik.uni-freiburg.de/profile/purucker/" target="_blank" rel="noopener">Lennart Purucker</a></h3><p class="aff">Prior Labs, University of Freiburg</p></div>
+          <p class="focus">Tabular foundation models and benchmarking (TabArena, AutoGluon, OpenML, TabPFN)</p>
+        </li>
+        <li class="org">
+          <span class="avatar c-coral" aria-hidden="true">MH</span>
+          <div><h3><a href="https://www.madelonhulsebos.com" target="_blank" rel="noopener">Madelon Hulsebos</a></h3><p class="aff">CWI Amsterdam</p></div>
+          <p class="focus">Leads the TRL Lab on tabular data processing and reasoning; founded the Table Representation Learning workshop series</p>
+        </li>
+        <li class="org">
+          <span class="avatar c-mint" aria-hidden="true">MS</span>
+          <div><h3><a href="https://maxschambach.github.io/" target="_blank" rel="noopener">Maximilian Schambach</a></h3><p class="aff">SAP</p></div>
+          <p class="focus">Leads SAP’s tabular foundation models workstream (ConTextTab, RPT)</p>
+        </li>
+        <li class="org">
+          <span class="avatar c-sun" aria-hidden="true">DH</span>
+          <div><h3><a href="https://dholzmueller.github.io/" target="_blank" rel="noopener">David Holzmüller</a></h3><p class="aff">Inria Saclay</p></div>
+          <p class="focus">Tabular foundation models and classical ML methods (TabICL, RealMLP, TabArena)</p>
+        </li>
+        <li class="org">
+          <span class="avatar c-blue" aria-hidden="true">FL</span>
+          <div><h3><a href="https://flefebv.github.io/" target="_blank" rel="noopener">Félix Lefebvre</a></h3><p class="aff">Inria Saclay</p></div>
+          <p class="focus">Knowledge integration for tabular learning and knowledge graph embeddings</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Questions: <a href="mailto:tabular--relational-ellis@googlegroups.com">tabular--relational-ellis@googlegroups.com</a></p>
+    <p>Part of the <a href="https://ellis-unconference.github.io/" target="_blank" rel="noopener">ELLIS UnConference 2026</a>, Palais des Congrès de Paris.</p>
+    <p>Related workshops by the organizers: <a href="https://table-representation-learning.github.io/" target="_blank" rel="noopener">Table Representation Learning</a>, <a href="https://icml-structured-fm-workshop.github.io/" target="_blank" rel="noopener">Foundation Models for Structured Data</a>, <a href="https://sites.google.com/view/eurips25-ai-td/home" target="_blank" rel="noopener">AI for Tabular Data @ EurIPS 2025</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
