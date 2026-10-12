@@ -1,6 +1,6 @@
 # AI for Tabular & Relational Data: What's Next?
 
-Website for our session at the [ELLIS UnConference 2026](https://ellis-unconference.github.io/) (Tuesday 8 December 2026, Paris).
+Website for our session at the [ELLIS UnConference 2026](https://ellis-unconference.github.io/) (Tuesday 8 December 2026, 14:00–16:00, Paris).
 
 Live at <https://lennartpurucker.github.io/tabular-relational-ellis/>
 
